@@ -17,7 +17,7 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
 
     @IBAction func placeScreenButtonTapped(_ sender: UIButton) {
-        iPhoneXNode.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "Device.scnassets/AR-Screen")
+        performSegue(withIdentifier: "HomeToDialog", sender: nil)
     }
 
     @IBAction func plusButtonTapped(_ sender: UIButton) {
@@ -63,6 +63,13 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
 
         // Pause the view's session
         sceneView.session.pause()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "HomeToDialog" {
+            let toVC = segue.destination as! DialogViewController
+            toVC.delegate = self
+        }
     }
 
     // MARK: - ARSCNViewDelegate
@@ -114,4 +121,13 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
         let repeatAction = SCNAction.repeatForever(action)
         return repeatAction
     }
+
+}
+
+extension ARImageViewController: DialogViewControllerDelegate {
+
+    func screenImageButtonTapped(image: UIImage) {
+        iPhoneXNode.geometry?.firstMaterial?.diffuse.contents = image
+    }
+
 }
