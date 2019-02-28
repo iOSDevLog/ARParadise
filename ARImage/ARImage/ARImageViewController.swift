@@ -82,6 +82,9 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
             iPhoneNode.runAction(rotateObject())
             let animator = SCNAction.scale(by: 10, duration: 3)
             iPhoneNode.runAction(animator)
+
+            let iPhoneLight = iPhoneScene.rootNode.childNodes.filter({ $0.name == "spot" }).first!
+            planeNode.addChildNode(iPhoneLight)
         }
 
         return node
