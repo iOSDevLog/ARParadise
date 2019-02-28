@@ -34,9 +34,12 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
 
         configuration.trackingImages = referenceImages
         configuration.maximumNumberOfTrackedImages = 1
+        configuration.isLightEstimationEnabled = true
 
         // Run the view's session
         sceneView.session.run(configuration)
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.automaticallyUpdatesLighting = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
