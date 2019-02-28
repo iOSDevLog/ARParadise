@@ -68,8 +68,16 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
 
             node.addChildNode(planeNode)
             planeNode.addChildNode(iPhoneNode)
+            iPhoneNode.runAction(rotateObject())
         }
 
         return node
+    }
+
+    // MARK: - Helper
+    func rotateObject() -> SCNAction {
+        let action = SCNAction.rotateBy(x: 0, y: CGFloat(GLKMathDegreesToRadians(360)), z: 0, duration: 3)
+        let repeatAction = SCNAction.repeatForever(action)
+        return repeatAction
     }
 }
