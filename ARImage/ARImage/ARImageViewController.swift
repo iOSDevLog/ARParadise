@@ -66,6 +66,13 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
             let iPhoneNode = iPhoneScene.rootNode.childNodes.first!
             iPhoneNode.position = SCNVector3(0, 0, 0.15)
 
+            let min = iPhoneNode.boundingBox.min
+            let max = iPhoneNode.boundingBox.max
+            iPhoneNode.pivot = SCNMatrix4MakeTranslation(
+                min.x + (max.x - min.x) / 2,
+                min.y + (max.y - min.y) / 2,
+                min.z + (max.z - min.z) / 2)
+
             node.addChildNode(planeNode)
             planeNode.addChildNode(iPhoneNode)
             iPhoneNode.runAction(rotateObject())
