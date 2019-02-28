@@ -75,7 +75,10 @@ class ARImageViewController: UIViewController, ARSCNViewDelegate {
 
             node.addChildNode(planeNode)
             planeNode.addChildNode(iPhoneNode)
+
             iPhoneNode.runAction(rotateObject())
+            let animator = SCNAction.scale(by: 10, duration: 3)
+            iPhoneNode.runAction(animator)
         }
 
         return node
